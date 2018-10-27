@@ -1,0 +1,71 @@
+<app-modal #modal>
+	<div class="app-modal-header"><i class="fa fa-fw fa-plus"></i>CADASTRAR NOVO CONTATO</div>
+
+	<div class="app-modal-body">
+		<form (#voterForm)="ngForm">
+			<div class="form-group">
+				<label>Nome*</label>
+        <input class="form-control" name="name"
+         [(ngModel)]="contact.name">
+			</div>
+
+			<div>
+				<label>Genero*</label>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">MALE</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">FEMALE</a></li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">OTHER</a></li>
+				</ul>
+
+				<!-- <div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  Dropdown button
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					  <a class="dropdown-item" href="#">MALE</a>
+					  <a class="dropdown-item" href="#">FEMALE</a>
+					  <a class="dropdown-item" href="#">OTHER</a>
+					</div>
+				  </div> -->
+
+			</div>
+			<div class="form-group">
+				<label>Data de Aniversário</label>
+				<input class="form-control" name="share"
+					   [(ngModel)]="contact.birthday"
+					   placeholder="00/00/0000"
+					   mask="00/00/0000">
+			</div>
+			<div class="form-group">
+				<label>E-mail*</label>
+        <input class="form-control" name="email"
+         [(ngModel)]="contact.email">
+			</div>
+      <div class="form-group">
+				<label>Telefone*</label>
+				<input class="form-control" name="phone"
+					   [(ngModel)]="contact.phone"
+					   placeholder="55 61 99999 9999"
+					   mask="00 00 00000 0000">
+			</div>
+			<div class="text-right">*campos obrigatórios</div>
+		</form>
+	</div>
+
+	<div class="app-modal-footer">
+		<div class="row no-margin">
+			<div class="col-md-6 no-padding">
+				<button class="btn btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="modal.hide()">
+					<i class="fa fa-fw fa-times"></i> CANCELAR
+				</button>
+			</div>
+
+			<div class="col-md-6 no-padding">
+				<button class="btn btn-lg btn-block hvr-underline-from-center success" (click)="saveContact()">
+					<i class="fa fa-fw fa-check"></i> SALVAR
+				</button>
+      </div>
+      
+		</div>
+	</div>
+</app-modal>

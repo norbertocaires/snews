@@ -1,0 +1,26 @@
+ <section class="navbar navbar-custom navbar-fixed-top" id="menu">
+	<nav role="navigation">
+		<div class="row">
+			<div class="col-md-2" >
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+						<i class="fa fa-bars"></i>
+					</button>
+					<a class="navbar-brand page-scroll" [routerLink]="['/*']"></a>
+				</div>
+			</div>
+
+			<div class="collapse navbar-collapse navbar-main-collapse">
+				<div class="col-md-2 no-padding">
+					<div class="row">
+						<div class="col-lg-8 pull-right user-name dropdown-hover" role="group">
+							<ul class="dropdown-menu text-center" role="menu">
+								<li><a (click)="logout()"> Sair <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+</section>

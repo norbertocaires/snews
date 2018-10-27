@@ -1,0 +1,71 @@
+<section class="container">
+  <div class="row">
+    <div class="col-9 pull-lefth">
+        <h1>AGENDA</h1>
+    </div>
+    <div class="col-3 pull-right no-padding margin">
+        <button (click)="contactAddComponent.open()" data-toggle="modal" type="button" class="btn btn-info btn-block" title="A partir deste botão, será possível cadastrar um novo contato"><i class="fa fa-fw fa-plus"></i> NOVO CONTATO</button>
+    </div>
+  </div>
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Genero</th>
+        <th scope="col">Data de Aniversario</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Telefone</th>
+        <th>Remover</th>
+        <th>atualizar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: page.totalElements }">
+        <th scope="row">{{contact.name}}</th>
+        <td>{{contact.gender}}</td>
+        <td>{{contact.birthday}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.phone}}</td>
+        <td><button data-toggle="modal" type="button" class="btn btn-danger pull-right" (click)="confirmDelete(contact)" title="Remove contact" ><i class="fa fa-minus-circle"></i></button></td>
+        <td><button data-toggle="modal" type="button" class="btn btn-info pull-right" (click)="contactUpdateComponent.open(contact._links.contact.href)" title="Update contact" ><i class="fa fa-edit"></i></button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="width: 50%; margin: 0 auto;">
+      <pagination-controls (pageChange)="pageChanged($event)"
+          previousLabel="Anterior"
+          nextLabel="Próxima">
+      </pagination-controls>
+  </div>
+
+
+  <!-- Modal-New -->
+  <app-contact-add #contactAddComponent
+          (onNewContact)="pageChanged($event)">
+  </app-contact-add>
+
+
+  <!-- Modal-Update -->
+  <app-contact-update #contactUpdateComponent 
+          (onUpdateContact)="pageChanged($event)">
+  </app-contact-update>
+
+<!-- Modal-Delete -->
+<app-modal #modal_delete>
+	<div class="app-modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="false"></button>
+		<span class="text-danger">Atenção!</span>
+	</div>
+	<div class="app-modal-body">
+		Deseja remover o contato: {{modal_delete.stored.contactToDelete.name}}? Esta ação não poderá ser desfeita.
+	</div>
+	<div class="app-modal-footer row">
+		<div class="col-sm-6 no-padding">
+			<button class="btn btn-text btn-hot btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="delete(modal_delete.stored.contactToDelete)" translate><i class="fa fa-fw fa-trash"></i> REMOVER</button>
+		</div>
+		<div class="col-sm-6 no-padding">
+			<button class="btn btn-text btn-hot btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="modal_delete.hide()" translate><i class="fa fa-fw fa-times"></i> CANCELAR</button>
+		</div>
+	</div>
+</app-modal>
+</section>
