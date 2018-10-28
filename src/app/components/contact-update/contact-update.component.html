@@ -26,20 +26,21 @@
 					  <a class="dropdown-item" href="#">FEMALE</a>
 					  <a class="dropdown-item" href="#">OTHER</a>
 					</div>
-				  </div>
+				</div>
 
 			</div>
 			<div class="form-group">
 				<label>Data de Aniversário</label>
 				<input class="form-control" name="share"
 					   [(ngModel)]="contact.birthday"
-					   placeholder="00/00/0000"
-					   mask="00/00/0000">
+						 placeholder="0000-00-00"
+						 mask="0000-00-00">
 			</div>
 			<div class="form-group">
 				<label>E-mail*</label>
         <input class="form-control" name="email"
-         [(ngModel)]="contact.email">
+				 [(ngModel)]="contact.email"
+				 placeholder="email@email.com">
 			</div>
       <div class="form-group">
 				<label>Telefone*</label>

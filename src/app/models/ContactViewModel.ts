@@ -1,7 +1,4 @@
-import { RouterLinkWithHref } from "@angular/router";
-
 export class Contact {
-    id: number;
     name: string;
     gender: string;
     birthday: Date;

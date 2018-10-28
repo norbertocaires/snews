@@ -7,37 +7,42 @@
         <button (click)="contactAddComponent.open()" data-toggle="modal" type="button" class="btn btn-info btn-block" title="A partir deste botão, será possível cadastrar um novo contato"><i class="fa fa-fw fa-plus"></i> NOVO CONTATO</button>
     </div>
   </div>
+  <div *ngIf="page.totalElements > 0">
     <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nome</th>
-        <th scope="col">Genero</th>
-        <th scope="col">Data de Aniversario</th>
-        <th scope="col">E-mail</th>
-        <th scope="col">Telefone</th>
-        <th>Remover</th>
-        <th>atualizar</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let contact of contacts | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: page.totalElements }">
-        <th scope="row">{{contact.name}}</th>
-        <td>{{contact.gender}}</td>
-        <td>{{contact.birthday}}</td>
-        <td>{{contact.email}}</td>
-        <td>{{contact.phone}}</td>
-        <td><button data-toggle="modal" type="button" class="btn btn-danger pull-right" (click)="confirmDelete(contact)" title="Remove contact" ><i class="fa fa-minus-circle"></i></button></td>
-        <td><button data-toggle="modal" type="button" class="btn btn-info pull-right" (click)="contactUpdateComponent.open(contact._links.contact.href)" title="Update contact" ><i class="fa fa-edit"></i></button></td>
-      </tr>
-    </tbody>
-  </table>
-  <div style="width: 50%; margin: 0 auto;">
-      <pagination-controls (pageChange)="pageChanged($event)"
-          previousLabel="Anterior"
-          nextLabel="Próxima">
-      </pagination-controls>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Genero</th>
+          <th>Data de Aniversario</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+          <th>Remover</th>
+          <th>atualizar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of contacts | paginate: { itemsPerPage: perPage, currentPage: currentPage, totalItems: page.totalElements }">
+          <th>{{contact.name}}</th>
+          <td>{{contact.gender}}</td>
+          <td>{{contact.birthday}}</td>
+          <td>{{contact.email}}</td>
+          <td>{{contact.phone}}</td>
+          <td><button data-toggle="modal" type="button" class="btn btn-danger pull-center" (click)="confirmDelete(contact)" title="Remove contact" ><i class="fa fa-minus-circle"></i></button></td>
+          <td><button data-toggle="modal" type="button" class="btn btn-info pull-center" (click)="contactUpdateComponent.open(contact._links.contact.href)" title="Update contact" ><i class="fa fa-edit"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="width: 50%; margin: 0 auto;">
+        <pagination-controls (pageChange)="pageChanged($event)"
+            previousLabel="Anterior"
+            nextLabel="Próxima">
+        </pagination-controls>
+    </div>
   </div>
 
+  <table *ngIf="page.totalElements == 0">
+    <h4 class="pull-center">Não há contatos em sua agenda.</h4>
+   </table>
 
   <!-- Modal-New -->
   <app-contact-add #contactAddComponent
@@ -61,10 +66,10 @@
 	</div>
 	<div class="app-modal-footer row">
 		<div class="col-sm-6 no-padding">
-			<button class="btn btn-text btn-hot btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="delete(modal_delete.stored.contactToDelete)" translate><i class="fa fa-fw fa-trash"></i> REMOVER</button>
+			<button class="btn btn-text btn-hot btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="delete(modal_delete.stored.contactToDelete)"><i class="fa fa-fw fa-trash"></i> REMOVER</button>
 		</div>
 		<div class="col-sm-6 no-padding">
-			<button class="btn btn-text btn-hot btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="modal_delete.hide()" translate><i class="fa fa-fw fa-times"></i> CANCELAR</button>
+			<button class="btn btn-text btn-hot btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="modal_delete.hide()"><i class="fa fa-fw fa-times"></i> CANCELAR</button>
 		</div>
 	</div>
 </app-modal>
