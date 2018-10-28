@@ -1,0 +1,17 @@
+<div (click)="onContainerClicked($event)" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+	 [ngStyle]="{'display': 'none', 'opacity': visibleAnimate ? 1 : 0}">
+	<div class="modal-dialog" class="modal-md">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="alert text-center" [ngClass]="class">
+					<span>
+						<i class="fa" [ngClass]="circleClass"></i>
+						<span class="notification-message">{{message}}aqui</span>
+					</span>
+					
+					<button type="button" class="close" aria-label="Close" (click)="hide()"><span aria-hidden="true">x</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

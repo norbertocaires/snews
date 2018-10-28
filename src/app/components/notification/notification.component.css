@@ -1,0 +1,51 @@
+.modal {
+	background: rgba(0,0,0,0.6);
+}
+
+/* .modal-body {
+	padding: 0px;
+}
+
+.modal-content {
+	border-radius: 0px !important;
+	border: none;
+} */
+
+.alert {
+	font-family: 'Titillium Web', sans-serif;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding: 18px;
+	font-size: 16px;
+	border-radius: 0px;
+	margin-bottom: 0px;
+}
+
+.success {
+	border: 0px;
+	background-color: #51bf87;
+	color: #fff;
+}
+
+.danger {
+	border: 0px;
+	background-color: #DB5566;
+	color: #fff;
+}
+
+.warning {
+	border: 0px;
+	background-color: #fcf8e3;
+	color: #8a6d3b;
+}
+
+.info {
+	border: 0px;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+	color: #31708f;
+}
+
+.notification-message {
+	white-space: pre-line;
+}

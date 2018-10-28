@@ -5,7 +5,8 @@ import { Contact } from '../../models/ContactViewModel';
 import { ModalComponent } from '../modal/modal.component';
 
 import { ContactService } from '../../services/contact.service';
-import { NotificationService } from "../../services/notification.service";
+
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -17,16 +18,28 @@ export class ContactUpdateComponent implements OnInit {
 	@ViewChild('modal') modal: ModalComponent;
 
   @Output() onUpdateContact = new EventEmitter<Contact>();
-  
+
+	generos = [ "MALE", "FEMALE", "OTHER"];
+
+
   private contact: Contact = new Contact();
 
   constructor(
     private contactService: ContactService,
-    private notification: NotificationService
+    private notifications: NotificationsService
   ) { }
 
   ngOnInit() {
   }
+
+  checkContato(){
+		var toReturn = true;
+		if(!this.contact.name){
+			this.notifications.error("Digite o nome do cantato");
+			toReturn = false;
+		}
+		return toReturn;
+	}
 
   open(id: string): void {
     this.getContact(id);
@@ -38,20 +51,23 @@ export class ContactUpdateComponent implements OnInit {
     this.contactService.get(id).subscribe(
       result => { this.contact = result; },
       error => {
-        this.notification.error(error)
+        this.notifications.error(error)
       },
       () => { });
   }
 
   updateContact(){
+		if(this.checkContato() == false)
+			return;
+
     this.contactService.update(this.contact).subscribe(
       result => { },
       error => {
-        this.notification.error(error)
+        this.notifications.error('Erro interno ao atualizar contato')
       },
       () => {
         this.close_modal();
-        this.notification.success('Contato atualizado com sucesso');
+        this.notifications.success('Contato atualizado com sucesso');
       });
   }
   

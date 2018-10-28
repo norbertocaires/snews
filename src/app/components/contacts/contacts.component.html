@@ -1,5 +1,5 @@
 <section class="container">
-  <div class="row">
+  <div class="row" style="margin-top: 20px">
     <div class="col-9 pull-lefth">
         <h1>AGENDA</h1>
     </div>
@@ -12,7 +12,7 @@
       <thead>
         <tr>
           <th>Nome</th>
-          <th>Genero</th>
+          <th>Gênero</th>
           <th>Data de Aniversario</th>
           <th>E-mail</th>
           <th>Telefone</th>
@@ -27,8 +27,8 @@
           <td>{{contact.birthday}}</td>
           <td>{{contact.email}}</td>
           <td>{{contact.phone}}</td>
-          <td><button data-toggle="modal" type="button" class="btn btn-danger pull-center" (click)="confirmDelete(contact)" title="Remove contact" ><i class="fa fa-minus-circle"></i></button></td>
-          <td><button data-toggle="modal" type="button" class="btn btn-info pull-center" (click)="contactUpdateComponent.open(contact._links.contact.href)" title="Update contact" ><i class="fa fa-edit"></i></button></td>
+          <td><button data-toggle="modal" type="button" class="btn btn-danger pull-center" (click)="confirmDelete(contact)" title="Remover contato" ><i class="fa fa-minus-circle"></i></button></td>
+          <td><button data-toggle="modal" type="button" class="btn btn-info pull-center" (click)="contactUpdateComponent.open(contact._links.contact.href)" title="Atualizar Contato" ><i class="fa fa-edit"></i></button></td>
         </tr>
       </tbody>
     </table>
@@ -65,11 +65,11 @@
 		Deseja remover o contato: {{modal_delete.stored.contactToDelete.name}}? Esta ação não poderá ser desfeita.
 	</div>
 	<div class="app-modal-footer row">
-		<div class="col-sm-6 no-padding">
-			<button class="btn btn-text btn-hot btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="delete(modal_delete.stored.contactToDelete)"><i class="fa fa-fw fa-trash"></i> REMOVER</button>
+		<div class="col-md-6 no-padding">
+			<button class="btn btn-danger" style="border-radius: 0px;" type="button" data-dismiss="modal" (click)="modal_delete.hide()"><i class="fa fa-fw fa-times"></i> CANCELAR</button>
 		</div>
-		<div class="col-sm-6 no-padding">
-			<button class="btn btn-text btn-hot btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="modal_delete.hide()"><i class="fa fa-fw fa-times"></i> CANCELAR</button>
+    <div class="col-md-6 no-padding">
+			<button class="btn btn-success" type="button" data-dismiss="modal" (click)="delete(modal_delete.stored.contactToDelete)"><i class="fa fa-fw fa-trash"></i> REMOVER</button>
 		</div>
 	</div>
 </app-modal>

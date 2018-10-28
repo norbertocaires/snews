@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NotificationsService } from 'angular2-notifications';
 
 import { ContactUpdateComponent } from '../contact-update/contact-update.component';
 import { ContactAddComponent } from '../contact-add/contact-add.component';
@@ -6,6 +7,7 @@ import { ModalComponent } from '../modal/modal.component';
 
 import { ContactService } from '../../services/contact.service';
 import { NotificationService } from "../../services/notification.service";
+
 
 import { Contact } from '../../models/ContactViewModel';
 import {Page} from '../../models/PageViewModel';
@@ -26,12 +28,15 @@ export class ContactsComponent implements OnInit {
 	private perPage : number = 5;
 	private currentPage: number = 1;
 
+
   constructor(
     private contactService: ContactService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private notifications: NotificationsService,
   ) { }
 
   ngOnInit() {
+    this.notification.eventUpdateUserStorage.next(true);
     this.modalConfirmDelete.stored.contactToDelete = new Contact();
     this.pageChanged(this.currentPage);
   }
@@ -45,7 +50,7 @@ export class ContactsComponent implements OnInit {
         this.currentPage = changedPage + 1;
       }
    ,error => {
-    this.notification.success(error);
+    this.notifications.error(error);
     });
   }
 
@@ -59,15 +64,12 @@ export class ContactsComponent implements OnInit {
 	delete(contact: Contact): void {
 		this.contactService.delete(contact._links.contact.href).subscribe(
 			result => { },
-			error => { this.notification.error('Ocorreu um erro ao excluir o contato.') },
+			error => { this.notifications.error('Ocorreu um erro ao excluir o contato.') },
 			() => {
 				// onCompleted
-
-				var index: number = this.contacts.indexOf(contact);
-				if (index !== -1)
-					this.contacts.splice(index, 1);
-
-				this.notification.success('Contato excluido com sucesso');
+        this.currentPage = 1;
+				this.pageChanged(this.currentPage);
+				this.notifications.success('Contato excluido com sucesso');
 			}
 		);
 

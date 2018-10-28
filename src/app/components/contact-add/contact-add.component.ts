@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ModalComponent } from '../modal/modal.component';
 
 import { ContactService } from '../../services/contact.service';
-import { NotificationService } from "../../services/notification.service";
+import { NotificationsService } from 'angular2-notifications';
 
 import { Contact } from '../../models/ContactViewModel';
 
@@ -17,33 +17,48 @@ export class ContactAddComponent implements OnInit {
 	@ViewChild('modal') modal: ModalComponent;
 	@ViewChild('voterForm') voterForm: NgForm;
 
+	generos = [ "MALE", "FEMALE", "OTHER"];
+
 	@Output() onNewContact = new EventEmitter<Contact>();
 	  
   private contact: Contact = new Contact();
 
   constructor(
 	private contactService: ContactService,
-	private notification: NotificationService
+	private notifications: NotificationsService,
   ) { }
 
   ngOnInit() {
-  }
+	}
+	
+	checkContato(){
+		var toReturn = true;
+		if(!this.contact.name){
+			this.notifications.error("Digite o nome do cantato");
+			toReturn = false;
+		}
+		return toReturn;
+	}
 
   open(): void {
-		this.contact = new Contact;
+		this.contact = new Contact();
+		this.contact.gender = null;
 		this.modal.size = 'lg';
 		this.modal.show();
   }
 
   saveContact() {
-	  this.contactService.save(this.contact).subscribe(
-		result => { },
-		error => {
-			this.notification.error(error)
-		},
-		() => {
-			this.close_modal();
-			this.notification.success('Contato salvo com sucesso');
+		if(this.checkContato() == false)
+			return;
+
+  	this.contactService.save(this.contact).subscribe(
+			result => { },
+			error => {
+				this.notifications.error(error)
+			},
+			() => {
+				this.close_modal();
+				this.notifications.success('Contato salvo com sucesso');
 		});
 	}
 

@@ -1,6 +1,8 @@
 import { Component, Output, Input, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { NotificationService } from '../../services/notification.service';
+
 
 @Component({
 	selector: 'nav-menu',
@@ -9,17 +11,24 @@ import { Router } from '@angular/router';
 })
 export class NavMenuComponent {
 
+	public showLogout: boolean = false;
+
 	constructor(
 		private router: Router,
+		private notificationService: NotificationService,
 	) {
 
 	}
 
 	ngOnInit(): void {
+		this.notificationService.eventUpdateUserStorage.subscribe(
+			(event: any) => this.showLogout = event
+		);
 	}
-
+	
 	logout(){
-		this.router.navigateByUrl('/contatos');
+		this.showLogout = false;
+		this.router.navigateByUrl('/');
 	}
 
 }

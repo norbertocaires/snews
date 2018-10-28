@@ -5,29 +5,21 @@
 		<form (#voterForm)="ngForm">
 			<div class="form-group">
 				<label>Nome*</label>
-        <input class="form-control" name="name"
-         [(ngModel)]="contact.name">
+				<input class="form-control" name="name"
+				[(ngModel)]="contact.name">
 			</div>
 
 			<div>
-				<label>Genero*</label>
-				<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">MALE</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">FEMALE</a></li>
-					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">OTHER</a></li>
-				</ul>
-
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					  Dropdown button
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					  <a class="dropdown-item" href="#">MALE</a>
-					  <a class="dropdown-item" href="#">FEMALE</a>
-					  <a class="dropdown-item" href="#">OTHER</a>
-					</div>
+				<div>
+					<label>Gênero</label><br/>
+					<select class="form-control" name="sel" 
+					[(ngModel)]="contact.gender">
+					<option disabled selected value="null">Escolha o seu gênero</option>
+					<option *ngFor="let genero of generos" [ngValue]="genero">
+						{{genero}}
+					</option>
+				</select>
 				</div>
-
 			</div>
 			<div class="form-group">
 				<label>Data de Aniversário</label>
@@ -37,13 +29,13 @@
 						 mask="0000-00-00">
 			</div>
 			<div class="form-group">
-				<label>E-mail*</label>
-        <input class="form-control" name="email"
+				<label>E-mail</label>
+        		<input class="form-control" name="email"
 				 [(ngModel)]="contact.email"
 				 placeholder="email@email.com">
 			</div>
-      <div class="form-group">
-				<label>Telefone*</label>
+      		<div class="form-group">
+				<label>Telefone</label>
 				<input class="form-control" name="phone"
 					   [(ngModel)]="contact.phone"
 					   placeholder="55 61 99999 9999"
@@ -55,18 +47,16 @@
 
 	<div class="app-modal-footer">
 		<div class="row no-margin">
-			<div class="button no-padding">
-				<button class="btn btn-text btn-lg btn-block hvr-underline-from-center" type="button" data-dismiss="modal" (click)="modal.hide()">
+			<div class="col-md-6">
+				<button class="btn btn-danger" type="button" data-dismiss="modal" (click)="modal.hide()">
 					<i class="fa fa-fw fa-times"></i> CANCELAR
 				</button>
 			</div>
-
-			<div class="button no-padding">
-				<button class="btn btn-text btn-lg btn-block hvr-underline-from-center success" (click)="updateContact()">
+			<div class="col-md-6">
+				<button class="btn btn-success" (click)="updateContact()">
 					<i class="fa fa-fw fa-check"></i> SALVAR
 				</button>
-      </div>
-      
+    		</div>
 		</div>
 	</div>
 </app-modal>
